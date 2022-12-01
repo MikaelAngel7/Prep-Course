@@ -1,5 +1,7 @@
 // No cambies los nombres de las funciones.
 
+const { Linter } = require("eslint");
+
 function deObjetoAmatriz(objeto){
   // Escribe una función que convierta un objeto en una matriz, donde cada elemento representa 
   // un par clave-valor en forma de matriz.
@@ -10,6 +12,11 @@ function deObjetoAmatriz(objeto){
       C: 3
     }) ➞ [["D", 1], ["B", 2], ["C", 3]]*/
   //Escribe tu código aquí
+  var matriz = [];
+  for(var key in objeto) {
+    matriz.push([key, objeto[key]])
+  }
+  return matriz;
 }
 
 
@@ -18,7 +25,17 @@ function numberOfCharacters(string) {
   //en formato par clave-valor.
   //Ej: Recibe ---> "adsjfdsfsfjsdjfhacabcsbajda" || Devuelve ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 } 
   //Escribe tu código aquí
-}
+  var cantCaracteres = {};
+
+  for(var i = 0; i < string.length; i++){
+    if(cantCaracteres.hasOwnProperty(string[i])) {
+      cantCaracteres[string[i]]++;
+    } else {
+        cantCaracteres[string[i]] = 1;
+      }
+    }
+    return cantCaracteres;
+  }
 
 
 function capToFront(s) {
@@ -26,6 +43,16 @@ function capToFront(s) {
   //al principio de la palabra.
   //Ejemplo: soyHENRY -> HENRYsoy
   //Escribe tu código aquí
+  var mayusc = "";
+  var minusc = "";
+  for(var i = 0; i < s.length; i++) {
+    if(s[i] === s[i].toUpperCase()){
+      mayusc += s[i]
+    } else {
+      minusc += s[i];
+    }
+  };
+  return mayusc + minusc;
 }
 
 
@@ -35,28 +62,82 @@ function asAmirror(str) {
   //pero con cada una de sus palabras invertidas, como si fuera un espejo.
   //Ej: Recibe ---> "The Henry Challenge is close!" || Devuelve ---> "ehT yrneH egnellahC si !esolc"
   //Escribe tu código aquí
-} 
+  var phrase2 = str.split(" ");
+  console.log(phrase2);
 
+  var newarray = phrase2.map(function(element) { 
+    return element.split("").reverse().join("")
+  });
+
+  console.log(newarray)
+
+  console.log(newarray.join(" "))
+
+  var phrase2 = str
+  .split(" ")
+  .map (function (element) {
+    return element.split("").reverse().join("");
+  }) 
+  .join(" ");
+  return phrase2; 
+}
+console.log(asAmirror( " The Henry Challenge is close!"));
 
 function capicua(numero){
   //Escribe una función, la cual recibe un número y determina si es o no capicúa.
   //La misma debe retornar: "Es capicua" si el número se número que se lee igual de 
   //izquierda a derecha que de derecha a izquierda. Caso contrario retorna "No es capicua"
   //Escribe tu código aquí
+  var string = numero.toString();
+  var stringInvertida = "";
+
+  stringInvertida = string.split("").reverse().join("");
+
+  if (string !== stringInvertida) {
+    return "No es capicua";
+  }
+  return "Es capicua";
 }
+console.log(capicua(12321));
+console.log(capicua(105217));
 
 
 function deleteAbc(cadena){
   //Define una función que elimine las letras "a", "b" y "c" de la cadena dada 
   //y devuelva la versión modificada o la misma cadena, en caso de contener dichas letras.
   //Escribe tu código aquí
+  var cadena2 = "";
+
+  for (let i = 0; i < cadena.length; i++) {
+    if(cadena[i] !== "a" && cadena[i] !== "b" && cadena[i] !== "c") {
+      cadena2 += cadena[i];
+    }
+  }
+  return cadena2;
 }
+console.log(deleteAbc("abcdefgh"));
 
 
 function sortArray(arr) {
   //La función recibe una matriz de strings. Ordena la matriz en orden creciente de longitudes de cadena
   //Ej: Recibe ---> ["You", "are", "beautiful", "looking"] || Devuelve ---> [“You", "are", "looking", "beautiful"]
   //Escribe tu código aquí
+  for(let i = 0; i < arr.length; i++){
+    for(let j = i + 1; j < arr.length; j++){
+       
+      console.log(arr[i]);
+      console.log(arr[j]);
+
+      if(arr[j].length < arr[i].length){
+        var aux = arr[j];
+        arr[j] = arr[i];
+        arr[i] = aux;
+        console.log(arr[i]);
+        console.log(arr[j]);
+      }
+    }
+  }
+  return arr;
 }
 
 
@@ -66,6 +147,16 @@ function buscoInterseccion(arreglo1, arreglo2){
   //Si no tienen elementos en común, retornar un arreglo vacío.
   //Aclaración: los arreglos no necesariamente tienen la misma longitud
   //Escribe tu código aquí  
+  var nuevoArr = [];
+
+  for(let i = 0; i < arreglo1.length; i++){
+    for(let j = 0; j < arreglo2.length; j++){
+      if(arreglo1[i] === arreglo2[j]){
+        nuevoArr.push(arreglo1[i]);
+      }
+    }
+  }
+  return nuevoArr;
 }
 
 
